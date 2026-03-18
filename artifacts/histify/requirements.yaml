@@ -1,0 +1,16 @@
+packages:
+  "framer-motion": "For page transitions, glassmorphism reveal effects, and smooth UI interactions."
+  "zustand": "For lightweight global state management of the current lesson, quiz, and user answers across different routes without prop drilling."
+  "canvas-confetti": "For celebratory animation on the result page when a user scores well on a quiz."
+  "@types/canvas-confetti": "Type definitions for canvas-confetti."
+  "clsx": "For conditional class names in UI components."
+  "tailwind-merge": "For merging tailwind classes efficiently."
+
+images:
+  - path: "artifacts/histify/public/images/hero-bg.png"
+    description: "Abstract deep navy blue background with subtle glowing red and pink nebulae, soft geometric glassmorphism floating shapes, premium 4k modern tech feel."
+    aspect_ratio: "16:9"
+
+notes:
+  - API endpoints are generated via orval in @workspace/api-client-react.
+  - Using Web Speech API for the Read Aloud feature; behavior might vary slightly by browser but standard Synthesis API will be used.

@@ -1,0 +1,264 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: Histify API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: lessons
+    description: Lesson generation
+  - name: history
+    description: Search history
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /lessons/generate:
+    post:
+      operationId: generateLesson
+      tags: [lessons]
+      summary: Generate a history lesson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateLessonBody"
+      responses:
+        "200":
+          description: Generated lesson
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lesson"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /lessons/quiz:
+    post:
+      operationId: generateQuiz
+      tags: [lessons]
+      summary: Generate quiz questions from lesson content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateQuizBody"
+      responses:
+        "200":
+          description: Generated quiz
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quiz"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /history:
+    get:
+      operationId: getHistory
+      tags: [history]
+      summary: Get all search history
+      responses:
+        "200":
+          description: List of search history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SearchHistoryItem"
+    delete:
+      operationId: clearHistory
+      tags: [history]
+      summary: Clear all search history
+      responses:
+        "200":
+          description: History cleared
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+      required:
+        - success
+        - message
+    GenerateLessonBody:
+      type: object
+      properties:
+        topic:
+          type: string
+        level:
+          type: string
+          enum: [Beginner, Intermediate, Advanced]
+      required:
+        - topic
+        - level
+    LessonSection:
+      type: object
+      properties:
+        heading:
+          type: string
+        content:
+          type: string
+      required:
+        - heading
+        - content
+    Lesson:
+      type: object
+      properties:
+        title:
+          type: string
+        overview:
+          type: string
+        sections:
+          type: array
+          items:
+            $ref: "#/components/schemas/LessonSection"
+        keyFacts:
+          type: array
+          items:
+            type: string
+        funFact:
+          type: string
+        topic:
+          type: string
+        level:
+          type: string
+      required:
+        - title
+        - overview
+        - sections
+        - keyFacts
+        - funFact
+        - topic
+        - level
+    GenerateQuizBody:
+      type: object
+      properties:
+        lessonContent:
+          type: string
+        topic:
+          type: string
+        level:
+          type: string
+      required:
+        - lessonContent
+        - topic
+        - level
+    QuizOptions:
+      type: object
+      properties:
+        A:
+          type: string
+        B:
+          type: string
+        C:
+          type: string
+        D:
+          type: string
+      required:
+        - A
+        - B
+        - C
+        - D
+    QuizQuestion:
+      type: object
+      properties:
+        question:
+          type: string
+        options:
+          $ref: "#/components/schemas/QuizOptions"
+        answer:
+          type: string
+      required:
+        - question
+        - options
+        - answer
+    Quiz:
+      type: object
+      properties:
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuizQuestion"
+        topic:
+          type: string
+        level:
+          type: string
+      required:
+        - questions
+        - topic
+        - level
+    SearchHistoryItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        topic:
+          type: string
+        level:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - topic
+        - level
+        - createdAt
