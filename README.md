@@ -1,44 +1,57 @@
-# Histify — AI-Powered History Learning Platform
+<div align="center">
 
-Histify is a full-stack web application where you enter any history topic, choose your learning level (Beginner, Intermediate, or Advanced), and instantly receive a structured AI-generated lesson complete with an interactive quiz. All your searches are saved so you can revisit past lessons anytime.
+# 📚 Histify
+### AI-Powered History Learning Platform
 
----
+*Enter any history topic. Get a full lesson. Take a quiz. Learn faster.*
 
-## Live Demo
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org)
+[![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://reactjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6.svg)](https://typescriptlang.org)
+[![Powered by Gemini](https://img.shields.io/badge/AI-Gemini%202.0%20Flash-4285F4.svg)](https://aistudio.google.com)
 
-Hosted on Replit — visit the deployed app at your `.replit.app` URL.
-
----
-
-## Features
-
-- **AI Lesson Generation** — Enter any topic (e.g. "World War 2", "Ancient Rome") and get a full structured lesson with title, overview, 3 detailed sections, key facts, and a fun fact
-- **Difficulty Levels** — Choose Beginner, Intermediate, or Advanced to tailor the depth of content
-- **Interactive Quiz** — 5 multiple-choice questions auto-generated from your lesson with instant scoring
-- **Quiz Results** — Detailed results page showing correct/incorrect answers and your score
-- **Text-to-Speech** — "Read Aloud" button reads your lesson out loud using the browser's Speech API
-- **Search History** — Every lesson you generate is saved and browsable, with the ability to clear history
-- **Responsive Design** — Works on desktop and mobile with a dark navy glassmorphism aesthetic
+</div>
 
 ---
 
-## Tech Stack
+## ✨ What is Histify?
+
+**Histify** is a full-stack web application that turns any history topic into a structured, interactive learning experience in seconds. Just type a topic, pick your level, and get an AI-generated lesson complete with a quiz — all with a sleek dark glassmorphism UI.
+
+---
+
+## 🚀 Features
+
+| Feature | Description |
+|---|---|
+| 🧠 **AI Lesson Generation** | Enter any topic (e.g. *"World War 2"*, *"Ancient Rome"*) and get a full lesson with title, overview, 3 detailed sections, key facts, and a fun fact |
+| 🎓 **Difficulty Levels** | Choose **Beginner**, **Intermediate**, or **Advanced** to tailor the depth of content |
+| 📝 **Interactive Quiz** | 5 auto-generated multiple-choice questions from your lesson with instant scoring |
+| 📊 **Quiz Results** | Detailed results page showing correct/incorrect answers and your final score |
+| 🔊 **Text-to-Speech** | "Read Aloud" button narrates your lesson using the browser's Speech API |
+| 🕘 **Search History** | Every lesson you generate is saved and browsable; clear history anytime |
+| 📱 **Responsive Design** | Works on desktop and mobile with a dark navy glassmorphism aesthetic |
+
+---
+
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Frontend | React 18 + Vite + TypeScript |
-| Styling | Tailwind CSS + shadcn/ui |
-| Animations | Framer Motion |
-| State Management | Zustand |
-| Backend | Node.js + Express 5 + TypeScript |
-| Database | PostgreSQL + Drizzle ORM |
-| AI | Google Gemini 2.0 Flash (via Replit AI Integrations) |
-| Monorepo | pnpm workspaces |
-| API Contract | OpenAPI 3.0 spec with auto-generated React Query hooks and Zod schemas |
+| **Frontend** | React 18 + Vite + TypeScript |
+| **Styling** | Tailwind CSS + shadcn/ui |
+| **Animations** | Framer Motion |
+| **State Management** | Zustand |
+| **Backend** | Node.js + Express 5 + TypeScript |
+| **Database** | PostgreSQL + Drizzle ORM |
+| **AI** | Google Gemini 2.0 Flash (via Replit AI Integrations) |
+| **Monorepo** | pnpm workspaces |
+| **API Contract** | OpenAPI 3.0 spec with auto-generated React Query hooks and Zod schemas |
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 histify/
@@ -53,7 +66,7 @@ histify/
 │   │       │   │   └── index.ts     # POST /api/lessons/generate
 │   │       │   │                    # POST /api/lessons/quiz
 │   │       │   └── history/
-│   │       │       └── index.ts     # GET /api/history
+│   │       │       └── index.ts     # GET  /api/history
 │   │       │                        # DELETE /api/history
 │   │       └── lib/
 │   │           └── gemini.ts        # Gemini AI lesson + quiz generation
@@ -78,12 +91,9 @@ histify/
 │           ├── components/
 │           │   ├── layout.tsx       # Navbar + page wrapper
 │           │   └── ui/              # shadcn/ui components
-│           ├── hooks/
-│           │   ├── use-toast.ts
-│           │   └── use-mobile.tsx
-│           └── lib/
-│               ├── utils.ts
-│               └── store.ts
+│           └── hooks/
+│               ├── use-toast.ts
+│               └── use-mobile.tsx
 │
 ├── lib/
 │   ├── api-spec/
@@ -109,17 +119,17 @@ histify/
 
 ---
 
-## API Reference
+## 📡 API Reference
 
 | Method | Endpoint | Body | Description |
 |---|---|---|---|
 | `GET` | `/api/healthz` | — | Health check |
-| `POST` | `/api/lessons/generate` | `{ topic: string, level: "Beginner"\|"Intermediate"\|"Advanced" }` | Generate an AI history lesson |
-| `POST` | `/api/lessons/quiz` | `{ lesson: object }` | Generate a 5-question quiz from a lesson |
+| `POST` | `/api/lessons/generate` | `{ topic, level }` | Generate an AI history lesson |
+| `POST` | `/api/lessons/quiz` | `{ lesson }` | Generate a 5-question quiz from a lesson |
 | `GET` | `/api/history` | — | Get all saved search history |
 | `DELETE` | `/api/history` | — | Clear all search history |
 
-### Example: Generate a Lesson
+### Generate a Lesson
 
 ```bash
 curl -X POST https://your-app.replit.app/api/lessons/generate \
@@ -134,9 +144,9 @@ curl -X POST https://your-app.replit.app/api/lessons/generate \
   "title": "The French Revolution",
   "overview": "...",
   "sections": [
-    { "heading": "Causes", "content": "..." },
-    { "heading": "Key Events", "content": "..." },
-    { "heading": "Legacy", "content": "..." }
+    { "heading": "Causes",      "content": "..." },
+    { "heading": "Key Events",  "content": "..." },
+    { "heading": "Legacy",      "content": "..." }
   ],
   "keyFacts": ["...", "..."],
   "funFact": "..."
@@ -145,43 +155,43 @@ curl -X POST https://your-app.replit.app/api/lessons/generate \
 
 ---
 
-## Database Schema
+## 🗄️ Database Schema
 
 ```sql
 -- search_history table (PostgreSQL via Drizzle ORM)
 CREATE TABLE search_history (
   id        SERIAL PRIMARY KEY,
-  topic     TEXT NOT NULL,
-  level     TEXT NOT NULL,
-  lesson    JSONB NOT NULL,
+  topic     TEXT      NOT NULL,
+  level     TEXT      NOT NULL,
+  lesson    JSONB     NOT NULL,
   createdAt TIMESTAMP DEFAULT NOW()
 );
 ```
 
 ---
 
-## Running on Replit (Recommended)
+## ⚡ Running on Replit (Recommended)
 
-This project is designed to run on Replit with zero configuration:
+This project is designed to run on Replit with **zero configuration**:
 
 1. **Fork** this Replit project
 2. Click **Run** — the app starts automatically
-3. Gemini AI is auto-configured via Replit AI Integrations (no API key needed)
+3. Gemini AI is auto-configured via Replit AI Integrations *(no API key needed)*
 4. PostgreSQL is auto-provisioned by Replit
 
 That's it — no `.env` files, no manual setup.
 
 ---
 
-## Running Locally
+## 🖥️ Running Locally
 
 > You will need your own Gemini API key and a PostgreSQL database.
 
 ### Prerequisites
 
 - Node.js 20+
-- pnpm: `npm install -g pnpm`
-- A PostgreSQL database (local or hosted e.g. Neon, Supabase)
+- pnpm — `npm install -g pnpm`
+- A PostgreSQL database (local or hosted via [Neon](https://neon.tech) / [Supabase](https://supabase.com))
 - A Gemini API key from [aistudio.google.com](https://aistudio.google.com)
 
 ### Setup
@@ -222,20 +232,36 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## How the AI Generation Works
+## 🤖 How the AI Generation Works
 
-1. The frontend sends a `topic` and `level` to `POST /api/lessons/generate`
-2. The Express server calls Gemini 2.0 Flash with a carefully structured prompt
-3. Gemini returns a JSON lesson (title, overview, sections, keyFacts, funFact)
-4. The lesson is saved to PostgreSQL and returned to the frontend
-5. When the user clicks "Take Quiz", the lesson content is sent to `POST /api/lessons/quiz`
-6. Gemini generates 5 multiple-choice questions specific to that lesson
-7. The frontend shows the quiz, grades answers, and displays results
+```
+User inputs topic + level
+        ↓
+POST /api/lessons/generate
+        ↓
+Express calls Gemini 2.0 Flash with structured prompt
+        ↓
+Gemini returns JSON lesson (title, overview, sections, keyFacts, funFact)
+        ↓
+Lesson is saved to PostgreSQL and returned to frontend
+        ↓
+User clicks "Take Quiz"
+        ↓
+POST /api/lessons/quiz — Gemini generates 5 MCQs
+        ↓
+Frontend shows quiz → grades answers → displays results
+```
 
 ---
 
-## License
+## 📄 License
 
-MIT — free to use, modify, and distribute.
-#   H i s f i t y - A I - P r o j e c t  
- 
+This project is licensed under the **MIT License** — free to use, modify, and distribute.
+
+---
+
+<div align="center">
+
+Made with ❤️ using React, Express & Google Gemini
+
+</div>
