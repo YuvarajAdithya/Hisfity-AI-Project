@@ -198,7 +198,7 @@ That's it — no `.env` files, no manual setup.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/histify.git
+git clone https://github.com/YuvarajAdithya/Hisfity-AI-Project.git
 cd histify
 
 # 2. Install all dependencies
@@ -228,7 +228,7 @@ pnpm --filter @workspace/api-server run dev
 pnpm --filter @workspace/histify run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open "https://code-explorer--yuvarajadithyar.replit.app/" in your browser.
 
 ---
 
